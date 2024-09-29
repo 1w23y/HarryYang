@@ -1,0 +1,80 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+nav {
+  text-align: left;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+#org-info {
+  padding: 20px;
+}
+
+#active-fundraisers {
+  padding: 20px;
+}
+
+#fundraisers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.fundraiser-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+#search-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#search-form input[type="text"] {
+  font-size: 20px;
+  padding: 8px 12px;
+  width: 200px;
+  height: 30px;
+}
+
+#search-form select {
+  font-size: 16px;
+  padding: 8px 12px;
+  width: 300px;
+  height: 50px;
+} 
+
+#search-form input[type="button"] {
+  font-size: 17px;
+  padding: 10px 20px;
+}

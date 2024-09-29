@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../HomePage/styles.css">
+    <title>Search Fundraisers</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="../HomePage/index.html">Home</a></li>
+            <li><a href="../SearchPage/search.html">Search</a></li>
+            <li><a href="../FundraiserPage/fundraiser.html">Fundraiser Details</a></li>
+        </ul>
+    </nav>
+
+    <h1>Search Fundraisers</h1>
+    <form id="search-form">
+        <label for="organizer">Organizer:</label>
+        <input type="text" id="organizer" name="organizer"><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city"><br>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="">Select a category</option>
+            <option value="1">People</option>
+            <option value="2">Society</option>
+            <option value="3">Nature</option>
+        </select><br>
+        <script src="../SearchPage/script.js"></script>
+        <script type="module"></script>
+        <input type="button" value="Search" onclick="searchFundraisers()">
+        <input type="button" value="Clear" onclick="clearCheckboxes()">
+    </form>
+
+    <div id="search-results"></div>
+
+</body>
+
+</html>
