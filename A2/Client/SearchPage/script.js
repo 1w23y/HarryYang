@@ -72,3 +72,24 @@ function searchFundraisers() {
         console.error('Error searching for fundraisers:', error);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('http://localhost:3060/api/Crowdfunding/category')
+    .then(response => response.json())
+    .then(categories => {
+         const categorySelect = document.getElementById('category');
+         const defaultOption = document.createElement('option');
+         defaultOption.value = '';
+         defaultOption.textContent = 'Select a category';
+         categorySelect.appendChild(defaultOption);
+         categories.forEach(category => {
+             const option = document.createElement('option');
+             option.value = category.CATEGORY_ID;
+             option.textContent = category.NAME;
+             categorySelect.appendChild(option);
+         });
+     })
+    .catch(error => {
+         console.error('Error fetching categories:', error);
+     });
+});
