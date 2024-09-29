@@ -64,7 +64,7 @@ router.get('/search', (req, res) => {
     });
 });
 
-router.get('/fundraiser/:id', (req, res) => {
+app.get('/fundraiser/:id', (req, res) => {
     const fundraiserId = req.params.id;
     const query = 'SELECT fundraiser.*, category.NAME AS category_name FROM fundraiser INNER JOIN category ON fundraiser.CATEGORY_ID = category.CATEGORY_ID WHERE fundraiser.FUNDRAISER_ID =?';
     connection.query(query, [fundraiserId], (err, results) => {

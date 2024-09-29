@@ -55,7 +55,7 @@ function searchFundraisers() {
                 const fundraiserItem = document.createElement('p');
                 const link = document.createElement('a');
                 const foundItem = data.find(item => item.FUNDRAISER_ID === id);
-                link.href = 'fundraiser.html?id=' + id;
+                link.href = '../FundraiserPage/fundraiser.html?id=' + id;
                 link.textContent = `${foundItem.CAPTION} - ${foundItem.ORGANIZER}`;
                 fundraiserItem.appendChild(link);
                 searchResults.appendChild(fundraiserItem);
