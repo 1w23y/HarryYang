@@ -1,12 +1,17 @@
 body {
   font-family: Arial, sans-serif;
+  /* Set font */
   margin: 0;
   padding: 0;
+  /* Clear inside and outside borders */
   font-size: 18px;
+  /* Set font size */
   text-align: center;
+  /* Page center */
 }
 
 nav {
+  /* Set the navigation page left justification and color */
   text-align: left;
   background-color: #333;
   color: white;
@@ -14,45 +19,52 @@ nav {
 }
 
 nav ul {
+  /* Set an unordered list in the navigation bar */
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
 nav ul li {
+  /* Set the display mode for list items */
   display: inline;
   margin-right: 20px;
 }
 
 nav ul li a {
+  /* Set the navigation bar link text */
   color: white;
   text-decoration: none;
 }
 
 h1, h2 {
+  /* Set the title text color */
   color: #333;
 }
 
+/*Format a table*/
 #org-info {
   padding: 20px;
 }
-
 #active-fundraisers {
   padding: 20px;
 }
 
 #fundraisers-list {
+  /* Set up a list of fundraising events */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 }
 
 .fundraiser-item {
+  /* Set up individual fundraiser items*/
   border: 1px solid #ccc;
   padding: 10px;
 }
 
 #search-form {
+  /*Set the search form style*/
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -61,6 +73,7 @@ h1, h2 {
 }
 
 #search-form input[type="text"] {
+  /* Set search form text input */
   font-size: 20px;
   padding: 8px 12px;
   width: 200px;
@@ -68,6 +81,7 @@ h1, h2 {
 }
 
 #search-form select {
+  /* Set the search form drop-down menu */
   font-size: 16px;
   padding: 8px 12px;
   width: 300px;
@@ -75,11 +89,13 @@ h1, h2 {
 } 
 
 #search-form input[type="button"] {
+  /* Set the search table search button */
   font-size: 17px;
   padding: 10px 20px;
 }
 
 #donate-button{
+  /* Set the fundraiser donation button */
   font-size: 17px;
   padding: 10px 20px;
 }
