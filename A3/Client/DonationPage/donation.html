@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../HomePage/styles.css">
+    <title>Donation</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="../HomePage/index.html">Home</a></li>
+            <li><a href="../SearchPage/search.html">Search</a></li>
+            <li><a href="../FundraiserPage/fundraiser.html">Fundraiser Details</a></li>
+            <li><a href="../DonationPage/donation.html">Donation</a></li>
+        </ul>
+    </nav>
+
+        <h1>Donation for [Fundraiser Name]</h1>
+        <h2>Details of fundraiser</h2>
+        <div id="fundraiser-details"></div>
+        <form id="donation-form">
+            <label for="amount">Amount of donation (Minimum 5 AUD):</label>
+            <input type="number" id="amount" required>
+            <label> &nbsp; </label>
+            <label for="giver">Your Name:</label>
+            <input type="text" id="giver" required>
+            <button type="submit">Submit my donation</button>
+        </form>
+        <script src="script.js"></script>
+    </body>
+    
+    </html>
