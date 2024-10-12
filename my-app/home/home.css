@@ -1,95 +1,16 @@
-
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-}
-
-h1 {
-    color: #333;
-}
-
-#add-fundraiser-form {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#fundraisers-list {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .fundraiser-item {
-    background-color: #fff;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.donations-list {
-    margin-top: 10px;
-}
-
-
-
-.edit-content {
-    flex: 1;
+    border: 10px solid #928d8d;
+    padding: 10px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
-}
+    align-items: center;
+} 
 
-h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
 
-p {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.donations-list {
-    margin-top: 10px;
-}

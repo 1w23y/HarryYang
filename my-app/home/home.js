@@ -2,10 +2,6 @@ document.getElementById('add-fundraiser-btn').addEventListener('click', () => {
     document.getElementById('add-fundraiser-form').style.display = 'block';
 });
 
-document.getElementById('cancel-add-btn').addEventListener('click', () => {
-    document.getElementById('add-fundraiser-form').style.display = 'none';
-});
-
 document.getElementById('save-btn').addEventListener('click', () => {
     const organizer = document.getElementById('organizer-input').value;
     const caption = document.getElementById('caption-input').value;
@@ -102,12 +98,9 @@ fetch("http://localhost:3060/api/Crowdfunding")
             `;
             fundraisersList.appendChild(fundraiserItem);
 
-            function bindEditButton() {
-                fundraiserItem.querySelector('.edit-btn').addEventListener('click', () => {
-                    const fundraiserId = fundraiserItem.querySelector('.edit-btn').getAttribute('data-fundraiser-id');
-                    const originalContent = fundraiserItem.innerHTML;
-
-                    const organizerInput = document.createElement('input');
+            fundraiserItem.querySelector('.edit-btn').addEventListener('click', () => {
+                const fundraiserId = fundraiserItem.querySelector('.edit-btn').getAttribute('data-fundraiser-id');
+                const organizerInput = document.createElement('input');
                     organizerInput.value = fundraiser.ORGANIZER;
                     const captionInput = document.createElement('input');
                     captionInput.value = fundraiser.CAPTION;
@@ -150,75 +143,68 @@ fetch("http://localhost:3060/api/Crowdfunding")
                     categorySelect.appendChild(categoryCultureOption);
                     categorySelect.value = fundraiser.category_id;
 
-                    const saveEditButton = document.createElement('button');
-                    saveEditButton.textContent = 'Save Edit';
-                    const cancelEditButton = document.createElement('button');
-                    cancelEditButton.textContent = 'Cancel Edit';
-                    cancelEditButton.addEventListener('click', () => {
-                        // 取消编辑，恢复原始显示
-                        fundraiserItem.innerHTML = originalContent;
-                        // 重新绑定编辑按钮的事件监听器
-                        bindEditButton();
+                const saveEditButton = document.createElement('button');
+                saveEditButton.textContent = 'Save Edit';
+                saveEditButton.addEventListener('click', async () => {
+                    const updatedData = {
+                        organizer: organizerInput.value,
+                        caption: captionInput.value,
+                        targetFunding: targetFundingInput.value,
+                        currentFunding: currentFundingInput.value,
+                        city: cityInput.value,
+                        active: activeSelect.value === '1',
+                        categoryId: categorySelect.value
+                    };
+                    const response = await fetch(`http://localhost:3060/api/Crowdfunding/updateFundraiser/${fundraiserId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedData)
                     });
-
-                    saveEditButton.addEventListener('click', async () => {
-                        const updatedData = {
-                            organizer: organizerInput.value,
-                            caption: captionInput.value,
-                            targetFunding: targetFundingInput.value,
-                            currentFunding: currentFundingInput.value,
-                            city: cityInput.value,
-                            active: activeSelect.value === '1',
-                            categoryId: categorySelect.value
-                        };
-                        const response = await fetch(`http://localhost:3060/api/Crowdfunding/updateFundraiser/${fundraiserId}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(updatedData)
+                    const message = await response.text();
+                    if (message === 'Fundraiser updated successfully') {
+                        fundraiserItem.innerHTML = `
+                            <h3 style="text-align:left;">${captionInput.value}</h3>
+                            <p style="text-align:left;">ID: ${fundraiserId}</p>
+                            <p style="text-align:left;">Organizer: ${organizerInput.value}</p>
+                            <p style="text-align:left;">Target Funding: ${targetFundingInput.value + ' AUD'}</p>
+                            <p style="text-align:left;">Current Funding: ${currentFundingInput.value + ' AUD'}</p>
+                            <p style="text-align:left;">City: ${cityInput.value}</p>
+                            <p style="text-align:left;">Active: ${activeSelect.value === '1'? 'Active' : 'Inactive'}</p>
+                            <p style="text-align:left;">Category: ${categorySelect.value}</p>
+                            <button class="edit-btn" data-fundraiser-id="${fundraiserId}">Edit</button>
+                            <button class="delete-btn" data-fundraiser-id="${fundraiserId}">Delete</button>
+                        `;
+                        // 重新绑定删除按钮的事件监听器
+                        fundraiserItem.querySelector('.delete-btn').addEventListener('click', async () => {
+                            const fundraiserId = fundraiserItem.querySelector('.delete-btn').getAttribute('data-fundraiser-id');
+                            const response = await fetch(`http://localhost:3060/api/Crowdfunding/deleteFundraiser/${fundraiserId}`, {
+                                method: 'DELETE'
+                            });
+                            const message = await response.text();
+                            if (message === 'Fundraiser deleted successfully') {
+                                fundraiserItem.remove();
+                            } else {
+                                alert('Error deleting fundraiser: ' + message);
+                            }
                         });
-                        const message = await response.text();
-                        if (message === 'Fundraiser updated successfully') {
-                            fundraiserItem.innerHTML = `
-                                <h3 style="text-align:left;">${captionInput.value}</h3>
-                                <p style="text-align:left;">ID: ${fundraiserId}</p>
-                                <p style="text-align:left;">Organizer: ${organizerInput.value}</p>
-                                <p style="text-align:left;">Target Funding: ${targetFundingInput.value + ' AUD'}</p>
-                                <p style="text-align:left;">Current Funding: ${currentFundingInput.value + ' AUD'}</p>
-                                <p style="text-align:left;">City: ${cityInput.value}</p>
-                                <p style="text-align:left;">Active: ${activeSelect.value === '1'? 'Active' : 'Inactive'}</p>
-                                <p style="text-align:left;">Category: ${categorySelect.value}</p>
-                                <button class="edit-btn" data-fundraiser-id="${fundraiserId}">Edit</button>
-                                <button class="delete-btn" data-fundraiser-id="${fundraiserId}">Delete</button>
-                            `;
-                        } else {
-                            alert('Error updating fundraiser: ' + message);
-                        }
-                    });
-
-                    const donationsList = displayDonations(fundraiserId);
-
-                    // 创建一个新的容器用于放置编辑内容
-                    const editContainer = document.createElement('div');
-                    editContainer.classList.add('edit-content');
-                    editContainer.appendChild(organizerInput);
-                    editContainer.appendChild(captionInput);
-                    editContainer.appendChild(targetFundingInput);
-                    editContainer.appendChild(currentFundingInput);
-                    editContainer.appendChild(cityInput);
-                    editContainer.appendChild(activeSelect);
-                    editContainer.appendChild(categorySelect);
-                    editContainer.appendChild(saveEditButton);
-                    editContainer.appendChild(cancelEditButton);
-                    editContainer.appendChild(donationsList);
-
-                    fundraiserItem.appendChild(editContainer);
+                    } else {
+                        alert('Error updating fundraiser: ' + message);
+                    }
                 });
-            }
 
-            // 初始绑定编辑按钮的事件监听器
-            bindEditButton();
+                const donationsList = displayDonations(fundraiserId);
+                fundraiserItem.appendChild(organizerInput);
+                fundraiserItem.appendChild(captionInput);
+                fundraiserItem.appendChild(targetFundingInput);
+                fundraiserItem.appendChild(currentFundingInput);
+                fundraiserItem.appendChild(cityInput);
+                fundraiserItem.appendChild(activeSelect);
+                fundraiserItem.appendChild(categorySelect);
+                fundraiserItem.appendChild(saveEditButton);
+                fundraiserItem.appendChild(donationsList);
+            });
 
             fundraiserItem.querySelector('.delete-btn').addEventListener('click', async () => {
                 const fundraiserId = fundraiserItem.querySelector('.delete-btn').getAttribute('data-fundraiser-id');
