@@ -99,16 +99,20 @@ router.post('/donation', (req, res) => {
     });
 });
 
-router.post('/newFundraiser', (req, res) => {
-    const { caption, organizer, targetFunding, currentFunding, city, categoryId } = req.body;
-    const query = 'INSERT INTO fundraiser (CAPTION, ORGANIZER, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?,?,?,?,?, 1,?)';
-    connection.query(query, [caption, organizer, targetFunding, currentFunding, city, categoryId], (err, results) => {
-        if (err) {
-            res.status(500).send('Error inserting fundraiser: ' + err.message);
-            return;
-        }
-        res.send('Fundraiser inserted successfully');
-    });
+router.post('/updateFundraiser', async (req, res) => {
+    try {
+        const { organizer, caption, targetFunding, currentFunding, city, active, categoryId } = req.body;
+        const query = 'INSERT INTO fundraiser ( ORGANIZER, CAPTION, TARGET_FUNDING, CURRENT_FUNDING, CITY, ACTIVE, CATEGORY_ID) VALUES (?,?,?,?,?,?,?)';
+        connection.query(query, [ organizer, caption, targetFunding, currentFunding, city, active, categoryId], (err, results) => {
+            if (err) {
+                res.status(500).send('Error inserting fundraiser: ' + err.message);
+                return;
+            }
+            res.send('Fundraiser inserted successfully');
+        });
+    } catch (error) {
+        res.status(500).send('Error inserting fundraiser: ' + error.message);
+    }
 });
 
 router.put('/updateFundraiser/:id', (req, res) => {

@@ -2,6 +2,6 @@
 module.exports = {
     host: 'localhost',
     user: 'root',
-    password: '1234',
+    password: '123456',
     database: 'crowdfunding_db'
 };
