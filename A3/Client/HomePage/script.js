@@ -29,6 +29,12 @@ fetch("http://localhost:3060/api/Crowdfunding")   // Use fetch to send http requ
                     case 3:
                         imgSrc = '../HomePage/image3.jpg'; 
                         break;
+                    case 4:
+                        imgSrc = '../HomePage/image4.jpg'; 
+                        break;    
+                    case 5:
+                        imgSrc = '../HomePage/image5.jpg'; 
+                        break;    
                 }
                 const img = document.createElement('img');
                 console.log(imgSrc);   //Acquisition path

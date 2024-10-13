@@ -14,10 +14,6 @@ app.use(express.static(__dirname));   // Set the current directory to the static
    res.sendFile(path.join(__dirname,"./home/home.html"));
 });
 
-// app.get("/update",(req,res)=>{   //The client accesses the path "/search" and sends the search.html file
-//     res.sendFile(path.join(__dirname,"./update/update.html"));
-// });
-
 app.listen(2323,()=>{      //Start the server and run it on port 2323
     console.log("Server up and running on port 2323");
 });
